@@ -201,6 +201,9 @@ var gCoursesTable = $("#tblCourses").DataTable({
 $(document).ready(function () {
   loadCourses();
   loadCourseToTable(gCoursesDB.courses);
+  $(function () {
+    $(".card").matchHeight();
+  });
 });
 // --------------Js cho backend-----------------
 
@@ -350,7 +353,7 @@ function deleteCourse(paramElement) {
 /**SECTION 4 Khai bao ham dung chung cho chuong trinh */
 //Ham tao element Card
 function getCourseElement(paramCourseObj) {
-  let vCourseElement = `<div class="col-sm-3">
+  let vCourseElement = `<div class="col-12 col-sm-6 col-lg-3 mt-3">
 <div class="card">
   <img
     class="card-img-top"
