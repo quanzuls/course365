@@ -1,0 +1,40 @@
+
+.slide-content {
+        margin-top:60px;
+}
+.carousel-wellcome {
+        margin-left: -100px;
+        margin-bottom : 80px;
+}
+.red {
+        border: 1px solid red;
+}.green {
+        border: 1px solid green;
+}
+.card-title {
+        font-weight: bold;
+}
+.card-text i {
+        margin-top: 5px;
+}
+.card-text i, p {
+        margin-right: 10px;
+}
+.teacher-thumb {
+        height: 50px;
+        width: 50px;
+        margin-right: 5px;
+}
+.card-bottom {
+        padding: 0.4em;
+        align-items: center;
+}
+
+.teacher-name {
+        margin-left: 10px;
+        margin-top: 13px;
+        font-size: 14px;
+}
+ul {
+        list-style-type: none;
+}

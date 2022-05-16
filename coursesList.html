@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course List</title>
+
+    <!-- Nhúng các thư viện BS4 & jQuery, awesome font -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <!-- Nhung thu vien Data Table -->
+    <!-- Data Table-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css"
+    />
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+  </head>
+  <body>
+    <!-- 1. Header - Navbar menu -->
+    <header id="header">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">
+          <img src="./images/Ionic_logo.png" alt="" srcset="" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html"
+                >Website <span class="sr-only">(current)</span></a
+              >
+            </li>
+          </ul>
+          <form class="form-inline">
+            <i
+              style="position: absolute; color: #6c757d"
+              class="far fa-search pl-3"
+            ></i>
+            <input
+              class="form-control mr-3 pl-5 w-70"
+              type="search"
+              placeholder="Search Courses"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <!-- 2.Body -->
+    <div class="container-fluid" style="margin-top: 100px">
+      <div class="container">
+        <div class="row mt-5 text-center text-info">
+          <div class="col-12">
+            <h3>Courses List</h3>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <button class="btn btn-success" id="addNewCourse">
+                <i class="fa fa-plus"></i>&nbsp; Add New Course
+              </button>
+            </div>
+          </div>
+          <div class="col-sm-12 mt-4">
+            <table class="table table-striped" id="tblCourses">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Course name</th>
+                  <th>Course image</th>
+                  <th>Price</th>
+                  <th>Discount price</th>
+                  <th>Teacher name</th>
+                  <th>Teacher avatar</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Vùng Modal -->
+
+      <!-- Create user modal -->
+      <div id="createCourseModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="h5-modal-title">Create new course</h5>
+              <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="createCourseName">Course name</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="text"
+                      id="courseName"
+                      name="courseName"
+                      placeholder="Course name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="input-create-discount">Course code</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="name"
+                      id="courseCode"
+                      name="courseCode"
+                      placeholder="Course code"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="input-create-discount"
+                      >Course cover image</label
+                    >
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="name"
+                      id="coverImage"
+                      name="coverImage"
+                      placeholder="Enter image link"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="input-create-discount">Price</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="number"
+                      id="price"
+                      name="price"
+                      placeholder="course price"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="discountPrice">Discount Price</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="number"
+                      id="discountPrice"
+                      name="discountPrice"
+                      placeholder="discount price"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="duration">Duration</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="name"
+                      id="duration"
+                      name="duration"
+                      placeholder="Duration"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="teacherName">Teacher Name</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="name"
+                      id="teacherName"
+                      name="teacherName"
+                      placeholder="Teacher name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="teacherPhoto">Teacher Photo</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="name"
+                      id="teacherPhoto"
+                      name="teacherPhoto"
+                      placeholder="Teacher photo link"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="level">Level</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <select name="level" id="level" class="form-control">
+                      <option value="Beginner">Beginner</option>
+                      <option value="Advanced">Advanced</option>
+                      <option value="Intermediate">Intermediate</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="isPopular">Is Popular</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <select
+                      name="isPopular"
+                      id="isPopular"
+                      class="form-control"
+                    >
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="isTrending">Is Trending</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <select
+                      name="isTrending"
+                      id="isTrending"
+                      class="form-control"
+                    >
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                class="btn btn-secondary"
+                id="btn-create-cancel"
+                data-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button class="btn btn-primary" id="btnCreateCourse">
+                Create Course
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit user modal -->
+      <div id="editCourseModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="h5-modal-title">Edit course</h5>
+              <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <input
+                  type="hidden"
+                  id="id"
+                  name="id"
+                  placeholder="Course id "
+                  class="form-control"
+                />
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="createCourseName">Course name</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="text"
+                      id="courseName"
+                      name="courseName"
+                      placeholder="Course name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="input-create-discount">Course code</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="name"
+                      id="courseCode"
+                      name="courseCode"
+                      placeholder="Course code"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="input-create-discount"
+                      >Course cover image</label
+                    >
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="name"
+                      id="coverImage"
+                      name="coverImage"
+                      placeholder="Enter image link"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="input-create-discount">Price</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="number"
+                      id="price"
+                      name="price"
+                      placeholder="course price"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="discountPrice">Discount Price</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="number"
+                      id="discountPrice"
+                      name="discountPrice"
+                      placeholder="discount price"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="duration">Duration</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="name"
+                      id="duration"
+                      name="duration"
+                      placeholder="Duration"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="teacherName">Teacher Name</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="name"
+                      id="teacherName"
+                      name="teacherName"
+                      placeholder="Teacher name"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="teacherPhoto">Teacher Photo</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <input
+                      type="name"
+                      id="teacherPhoto"
+                      name="teacherPhoto"
+                      placeholder="Teacher photo link"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="level">Level</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <select name="level" id="level" class="form-control">
+                      <option value="Beginner">Beginner</option>
+                      <option value="Advanced">Advanced</option>
+                      <option value="Intermediate">Intermediate</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="isPopular">Is Popular</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <select
+                      name="isPopular"
+                      id="isPopular"
+                      class="form-control"
+                    >
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-sm-4">
+                    <label for="isTrending">Is Trending</label>
+                  </div>
+                  <div class="col-sm-8">
+                    <select
+                      name="isTrending"
+                      id="isTrending"
+                      class="form-control"
+                    >
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                class="btn btn-secondary"
+                id="btn-create-cancel"
+                data-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button class="btn btn-primary" id="btnEditCourse">
+                Edit Course
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+        id="deleteCourseModal"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Delete Course</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Do you sure delete course. This action can't be recover!!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="btnDeleteCourse">
+                Delete Modal
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
