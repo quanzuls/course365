@@ -38,3 +38,28 @@
 ul {
         list-style-type: none;
 }
+.carousel-caption {
+        position: revert;
+}
+/**Tablet and mobile*/
+@media screen and (max-width:767px) {
+        .carosel__wrap {
+                display: flex;
+                flex-direction: column-reverse;
+        }
+        .carosel__img {
+                width: 100%;
+        }
+
+}
+/**Mobile*/
+@media screen and (max-width:767px) {
+        .carosel__wrap {
+                display: flex;
+                flex-direction: column-reverse;
+        }
+        .carosel__img {
+                width: 100%;
+        }
+
+}
